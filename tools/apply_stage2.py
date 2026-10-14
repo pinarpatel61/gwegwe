@@ -57,7 +57,7 @@ DECK_CARD = r"""function vcDeckCardHtml(card){
       (photo?'<img class="ph"'+vcCardSrc(photo)+' alt="" fetchpriority="high" id="vc-card-photo">':'<div class="ph" id="vc-card-photo" style="background:'+avatarBg(name||'?')+'"></div>')+
       '<div class="grad-t"></div><div class="grad-b"></div>'+segs+taps+
       '<span class="state'+(online?'':' off')+'"><i></i>'+h(online?t('online_now','Сейчас онлайн'):t('offline_short','не в сети'))+'</span>'+
-      '<button type="button" class="info" id="vc-full-profile" aria-label="'+h(t('all_profile','Вся анкета'))+'" title="'+h(t('all_profile','Вся анкета'))+'">'+v4Icon('info')+'</button>'+
+      '<button type="button" class="info" id="vc-full-profile" data-act="profile" aria-label="'+h(t('all_profile','Вся анкета'))+'" title="'+h(t('all_profile','Вся анкета'))+'">'+v4Icon('info')+'</button>'+
       '<div class="dinfo"><div class="nm">'+h(name)+(age?', '+age:'')+verified+'</div>'+(city?'<div class="loc">'+v4Icon('pin')+h(city)+'</div>':'')+(chips?'<div class="chips">'+chips+'</div>':'')+'<p class="bio" id="vc-card-bio"'+(bio?'':' data-pending="1"')+'>'+h(bio)+'</p></div>'+
       '<div class="stamp like" aria-hidden="true">'+h(t('like','Нравится'))+'</div><div class="stamp nope" aria-hidden="true">'+h(t('disc_nope','Пропустить'))+'</div>'+
     '</div></article>';
@@ -73,7 +73,7 @@ VIEW_DISCOVER = r"""function viewDiscover(){
   var filterDock=discoverFilterDockHtml();
   var filterBtn='<button type="button" class="ibtn" data-v4-filters aria-label="'+h(t('v4_filters','Фильтры'))+'" title="'+h(t('v4_filters','Фильтры'))+'">'+v4Icon('filter')+'</button>';
   var counter=(cards.length&&state.deckIdx<cards.length)?(state.deckIdx+1)+' / '+cards.length:'';
-  var head='<div class="dhead row-between"><div class="dtitle"><a class="logo vis-m" href="#/" aria-label="otkrovenno.online">otkrovenno<em>.online</em></a><div class="vis-d"><h1 class="page-h" id="page-title" tabindex="-1">'+h(t('nav_discover','Поиск'))+'</h1><p class="page-sub vc-deck-counter" id="profile-counter">'+h(counter)+'</p></div></div><div class="dtools">'+v4BalancePill()+filterDock+filterBtn+'</div></div>';
+  function dhead(filterDock){return '<div class="dhead row-between"><div class="dtitle"><a class="logo vis-m" href="#/" aria-label="otkrovenno.online">otkrovenno<em>.online</em></a><div class="vis-d"><h1 class="page-h" id="page-title" tabindex="-1">'+h(t('nav_discover','Поиск'))+'</h1><p class="page-sub vc-deck-counter" id="profile-counter">'+h(counter)+'</p></div></div><div class="dtools">'+v4BalancePill()+filterDock+filterBtn+'</div></div>';}
   if (!cards.length || state.deckIdx >= cards.length){
     var onlineActive=!!(state.discoverFilter&&state.discoverFilter.online),onlineLoading=onlineActive&&state.onlineDeckLoading,onlineError=onlineActive&&state.onlineDeckError;
     var onlineZero=onlineActive&&!onlineLoading&&!onlineError&&Array.isArray(state.onlineDeck)&&state.onlineDeck.length===0;
@@ -81,7 +81,7 @@ VIEW_DISCOVER = r"""function viewDiscover(){
     if(filteredEmpty){for(var fp=0;fp<fparts.length;fp++)fchips+='<button type="button" class="vc-empty-remove" data-remove-filter="'+h(fparts[fp].key)+'" aria-label="'+h(t('filter_remove','Убрать')+': '+fparts[fp].label)+'"><span>'+h(fparts[fp].label)+'</span><b aria-hidden="true">×</b></button>';}
     var emptyTitle=anyError?t('network_error','Ошибка сети'):(onlineLoading?t('online_filter_checking','Проверяем, кто сейчас в сети…'):(onlineZero?t('online_filter_empty','Сейчас никто не в сети'):(filteredEmpty?t('disc_empty_filtered','По вашим фильтрам анкет нет'):t('disc_empty','Анкеты закончились'))));
     var emptySub=anyError?t('check_connection','Проверьте соединение и попробуйте снова'):(onlineLoading?'':(onlineZero?t('online_filter_empty_sub','Отключите фильтр — покажем остальные анкеты.'):(filteredEmpty?t('disc_empty_filtered_sub','Уберите одно из ограничений — остальные сохранятся.'):t('disc_empty_sub','Новые анкеты появятся немного позже'))));
-    v4Page('<div class="disc"><div class="dcol">'+head+'<div class="deckwrap"><div class="deck"><div class="deck-end" role="status"><div class="em">'+v4Icon(anyError?'info':(onlineLoading?'clock':'compass'))+'</div><b>'+h(emptyTitle)+'</b>'+(emptySub?'<p>'+h(emptySub)+'</p>':'')+(fchips?'<div class="chips vc-empty-chips">'+fchips+'</div>':'')+(anyError?'<button type="button" class="btn btn-primary" id="vc-empty-retry">'+h(t('retry','Повторить'))+'</button>':'')+(filteredEmpty?'<div class="row2"><button type="button" class="btn btn-light btn-sm" id="vc-empty-reset">'+h(t('filters_reset_all','Сбросить все'))+'</button><button type="button" class="btn btn-dark btn-sm" id="vc-empty-filters">'+h(t('filters_edit','Изменить фильтры'))+'</button></div>':'')+'</div></div></div></div></div>','disc-page');
+    v4Page('<div class="disc"><div class="dcol">'+dhead(filterDock)+'<div class="deckwrap"><div class="deck"><div class="deck-end" role="status"><div class="em">'+v4Icon(anyError?'info':(onlineLoading?'clock':'compass'))+'</div><b>'+h(emptyTitle)+'</b>'+(emptySub?'<p>'+h(emptySub)+'</p>':'')+(fchips?'<div class="chips vc-empty-chips">'+fchips+'</div>':'')+(anyError?'<button type="button" class="btn btn-primary" id="vc-empty-retry">'+h(t('retry','Повторить'))+'</button>':'')+(filteredEmpty?'<div class="row2"><button type="button" class="btn btn-light btn-sm" id="vc-empty-reset">'+h(t('filters_reset_all','Сбросить все'))+'</button><button type="button" class="btn btn-dark btn-sm" id="vc-empty-filters">'+h(t('filters_edit','Изменить фильтры'))+'</button></div>':'')+'</div></div></div></div></div>','disc-page');
     $$('[data-remove-filter]',body).forEach(function(b){b.addEventListener('click',function(){discoverFilterRemove(b.dataset.removeFilter);});});
     var emptyReset=document.getElementById('vc-empty-reset');if(emptyReset)emptyReset.addEventListener('click',function(){state.discoverFilter=discoverFilterDefaults();cancelDiscoverOnlineRequest();applyDiscoverFilter(true);vcPersistDiscoverFilter();renderTopbar();viewDiscover();});
     wireDiscoverFilterDock(body);
@@ -96,14 +96,14 @@ VIEW_DISCOVER = r"""function viewDiscover(){
   var rewindEmpty = !(state.deckSwiped && state.deckSwiped.length);
   var nextPhotos=next?deckPhotosFor(next):[],nextPhoto=nextPhotos[0]||(next?(next.photo||next.avatar||''):'');
   var back='<div class="dcard back" aria-hidden="true">'+(nextPhoto?'<img class="ph"'+vcCardSrc(nextPhoto)+' alt="">':'')+'<div class="grad-b"></div></div>';
-  function act(cls,name,icon,label,attrs){return '<button type="button" class="act '+cls+'" data-act="'+name+'" title="'+h(label)+'" aria-label="'+h(label)+'"'+(attrs||'')+'>'+v4Icon(icon)+'</button>';}
-  v4Page('<div class="disc"><div class="dcol">'+head+vcCoachHtml()+
+  var rewindLabel=rewindEmpty?t('disc_rewind_none','Пока нечего возвращать'):t('disc_rewind','Вернуть анкету');
+  v4Page('<div class="disc"><div class="dcol">'+dhead(filterDock)+vcCoachHtml()+
     '<div class="deckwrap"><div class="deck" id="vc-card-back-wrap">'+back+vcDeckCardHtml(card)+'</div>'+
     '<div class="actions" id="vc-actions" role="group" aria-label="'+h(t('profile_actions','Действия с анкетой'))+'">'+
-      act('undo back-button','rewind','undo',rewindEmpty?t('disc_rewind_none','Пока нечего возвращать'):t('disc_rewind','Вернуть анкету'),rewindEmpty?' disabled':'')+
-      act('nope skip-button','pass','x',t('disc_nope','Пропустить'))+
-      act('l like-button','like','heartf',t('like','Нравится'))+
-      act('msg message-button','message','chat',t('send_message','Написать'))+
+      '<button type="button" class="act undo back-button" data-act="rewind" title="'+h(rewindLabel)+'" aria-label="'+h(t('disc_rewind','Вернуть анкету'))+'"'+(rewindEmpty?' disabled':'')+'>'+v4Icon('undo')+'</button>'+
+      '<button type="button" class="act nope skip-button" data-act="pass" title="'+h(t('disc_nope','Пропустить'))+'" aria-label="'+h(t('disc_nope','Пропустить'))+'">'+v4Icon('x')+'</button>'+
+      '<button type="button" class="act l like-button" data-act="like" title="'+h(t('like','Нравится'))+'" aria-label="'+h(t('like','Нравится'))+'">'+v4Icon('heartf')+'</button>'+
+      '<button type="button" class="act msg message-button" id="vc-write-cta" title="'+h(t('send_message','Написать'))+'" aria-label="'+h(t('send_message','Написать'))+'">'+v4Icon('chat')+'</button>'+
     '</div></div>'+
     '<p class="khint deck-kbd-hint" aria-hidden="true">'+h(t('deck_kbd_hint','← пропустить · → лайк · Enter — анкета · Backspace — вернуть'))+'</p>'+
     '<span id="profile-status" class="sr-only" role="status"></span>'+
@@ -114,6 +114,7 @@ VIEW_DISCOVER = r"""function viewDiscover(){
   $$('[data-panel-act]',body).forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();handleDeckAction(btn.dataset.panelAct);});});
   $$('[data-panel-photo]',body).forEach(function(btn){btn.addEventListener('click',function(){v4DeckShowPhoto(card,parseInt(btn.dataset.panelPhoto,10)||0);});});
   wireDiscoverMore();
+  var writeCta=document.getElementById('vc-write-cta');if(writeCta)writeCta.addEventListener('click',function(e){e.stopPropagation();handleDeckAction('message');});
   var fullProfile=document.getElementById('vc-full-profile');if(fullProfile)fullProfile.addEventListener('click',function(e){e.stopPropagation();handleDeckAction('profile');});
   wireDiscoverFilterDock(body);
   $$('[data-v4-filters]',body).forEach(function(b){b.addEventListener('click',openDiscoverFilters);});
@@ -263,21 +264,32 @@ VIEW_CHATS = r"""function viewChats(){
     '<div class="tabs" id="vc-chat-tabs"><button type="button" class="tab on" data-chat-tab="all">'+h(t('v4_tab_all','Все'))+'</button><button type="button" class="tab" data-chat-tab="unread">'+h(t('v4_tab_unread','Непрочитанные'))+(unreadN?'<span class="n">'+unreadN+'</span>':'')+'</button><button type="button" class="tab" data-chat-tab="online"><span class="dot"></span>'+h(t('v4_online','В сети'))+(onlineN?'<span class="n">'+onlineN+'</span>':'')+'</button></div>':'')+'</div>';
   var strip='';
   if(chats.length){
-    strip='<div class="faces" id="vc-chat-match-strip" tabindex="0" aria-label="'+h(t('nav_chats','Чаты'))+'">';
+    strip='<div class="chat-match-scroller"><div class="faces" id="vc-chat-match-strip" tabindex="0" aria-label="'+h(t('nav_chats','Чаты'))+'">';
     for(var si=0;si<chats.length&&si<18;si++){
       var sm=chats[si],sav=sm.photo||sm.avatar||'',sn=localizedPersonName(sm.name||sm.fullname||''),stripUnread=parseInt(sm.unread,10)||0;
       strip+='<button type="button" class="face'+(stripUnread?' has-unread':'')+'" data-match-chat="'+(sm.peer_id||sm.id||0)+'" aria-label="'+h(sn)+'"><span class="chat-match-avatar avatar'+(sm.online?' ring':'')+'" style="background:'+(sav?'url('+h(sav)+') center/cover,':'')+avatarBg(sn)+'">'+(sav?'':h(initials(sn)))+(stripUnread?'<b class="chat-match-unread">'+(stripUnread>99?'99+':stripUnread)+'</b>':'')+'</span><small>'+h(sn)+'</small></button>';
     }
-    strip+='</div>';
+    strip+='</div><button type="button" class="chat-match-next ibtn" id="vc-chat-match-next" aria-label="'+h(t('next','Дальше'))+'">'+v4Icon('chev')+'</button></div>';
   }
   var rows='';for(i=0;i<chats.length;i++)rows+=v4ChatRowHtml(chats[i],0);
-  var listHtml=chats.length?'<div class="list chat-list" id="vc-chat-list">'+rows+'</div><div class="empty" id="vc-chat-search-empty" hidden><b>'+h(t('no_search_results','Ничего не найдено'))+'</b></div>':v4Empty('chat',t('chats_context_title','Здесь появятся ваши переписки'),t('chats_context_copy','Выберите анкету и напишите сообщение — диалог начнётся сразу.'),t('go_discover','К поиску'),'/');
+  var listHtml=chats.length?'<div class="list chat-list" id="vc-chat-list">'+rows+'</div><div class="empty" id="vc-chat-search-empty" hidden><b>'+h(t('no_search_results','Ничего не найдено'))+'</b></div>':contextCtaHtml({tone:'purple',centered:true,icon:'chats',title:t('chats_context_title','Здесь появятся ваши переписки'),copy:t('chats_context_copy','Выберите анкету и напишите сообщение — диалог начнётся сразу.'),primary:{label:t('go_discover','К поиску'),route:'/'}});
   v4Page('<div class="chats" id="vc-chats-layout"><div class="clist">'+hd+'<div class="sc">'+strip+listHtml+'</div></div><div class="cthread vis-d"><div class="chat-empty"><div class="em">'+v4Icon('chat')+'</div><b>'+h(t('v4_select_chat','Выберите чат'))+'</b>'+h(t('v4_select_chat_sub','Переписка откроется здесь'))+'</div></div></div>','chats-page');
+  if(!chats.length)wireContextCtas(body);
+  var chatListPage=body.querySelector('.chats .sc'),chatListSurface=body.querySelector('.chat-list');
+  if(chatListPage&&chatListSurface)chatListSurface.addEventListener('wheel',function(e){
+    if(e.ctrlKey||Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;
+    var factor=e.deltaMode===1?16:(e.deltaMode===2?chatListPage.clientHeight:1),before=chatListPage.scrollTop;
+    chatListPage.scrollTop+=e.deltaY*factor;
+    if(chatListPage.scrollTop!==before)e.preventDefault();
+  },{passive:false});
   $$('#vc-main-body .chat-row').forEach(function(r){
     bindActivation(r,function(){ var pid = parseInt(r.dataset.pid,10); if (pid) navigate('/chat/'+pid); },'link');
   });
   $$('[data-match-chat]',body).forEach(function(btn){btn.addEventListener('click',function(){navigate('/chat/'+parseInt(btn.dataset.matchChat,10));});});
-  $$('[data-route]',body).forEach(function(el){el.addEventListener('click',function(){navigate(el.dataset.route);});});
+  var matchStrip=document.getElementById('vc-chat-match-strip'),matchNext=document.getElementById('vc-chat-match-next');
+  function syncMatchNext(){if(!matchStrip||!matchNext)return;var overflow=matchStrip.scrollWidth-matchStrip.clientWidth>4;matchNext.hidden=!overflow;matchNext.disabled=!overflow||matchStrip.scrollLeft>=matchStrip.scrollWidth-matchStrip.clientWidth-4;}
+  if(matchStrip){matchStrip.addEventListener('scroll',syncMatchNext,{passive:true});matchStrip.addEventListener('wheel',function(e){if(e.ctrlKey||Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;var before=matchStrip.scrollLeft;matchStrip.scrollLeft+=e.deltaY;if(matchStrip.scrollLeft!==before)e.preventDefault();},{passive:false});requestAnimationFrame(syncMatchNext);}
+  if(matchNext)matchNext.addEventListener('click',function(){matchStrip.scrollBy({left:Math.max(180,matchStrip.clientWidth*.72),behavior:'smooth'});});
   var chatSearch=document.getElementById('vc-chat-search'),tab='all';
   function applyChatFilter(){var q=chatSearch?chatSearch.value.trim().toLocaleLowerCase():'',visible=0;$$('.chat-row',body).forEach(function(row){var hide=(!!q&&String(row.dataset.search||'').indexOf(q)<0)||(tab==='unread'&&!row.classList.contains('has-unread'))||(tab==='online'&&row.dataset.online!=='1');row.hidden=hide;if(!hide)visible++;});var empty=document.getElementById('vc-chat-search-empty');if(empty)empty.hidden=!!visible;}
   if(chatSearch)chatSearch.addEventListener('input',applyChatFilter);
@@ -342,7 +354,7 @@ function check(value, label) { console.log((value ? 'PASS ' : 'FAIL ') + label);
 const deck = app.slice(app.indexOf('function vcDeckCardHtml('), app.indexOf('function viewDiscover('));
 check(deck.includes('class="dcard profile-card" id="vc-glass-card"') && deck.includes('id="vc-card-photo"') && deck.includes('id="vc-photo-segments"') && deck.includes('data-photo-step="-1"') && deck.includes('id="vc-card-bio"') && deck.includes('class="stamp like"'), 'deck card uses the prototype swipe card markup while keeping the legacy hooks (photo, segments, taps, bio)');
 const disc = app.slice(app.indexOf('function viewDiscover('), app.indexOf('function discoverFilterDockHtml('));
-check(disc.includes("v4Page('<div class=\"disc\"><div class=\"dcol\">") && disc.includes('id="vc-deck-panel"') && disc.includes('v4DeckPanelHtml(card)') && disc.includes('discoverMoreHtml()') && disc.includes("act('l like-button','like','heartf'") && disc.includes("data-act=\"'+name+'\""), 'discover renders deck + profile panel on desktop with the four floating actions');
+check(disc.includes("v4Page('<div class=\"disc\"><div class=\"dcol\">") && disc.includes('id="vc-deck-panel"') && disc.includes('v4DeckPanelHtml(card)') && disc.includes('discoverMoreHtml()') && disc.includes('class="act l like-button" data-act="like"') && disc.includes('id="vc-write-cta"'), 'discover renders deck + profile panel on desktop with the four floating actions');
 check(disc.includes('[data-v4-filters]') && disc.includes('wireDiscoverFilterDock(body)') && disc.includes('wireSwipe();') && disc.includes('wireDeckPhotos(card);') && disc.includes("authApi('get_bio'") && disc.includes("getElementById('vc-panel-bio')"), 'discover keeps filters, swipe, photo taps, keys and the lazy bio for both card and panel');
 check(app.includes('function v4DeckPanelHtml(card)') && app.includes('data-panel-act="message"') && app.includes('data-panel-photo='), 'the deck panel shows facts, interests, thumbnails and actions for the current card');
 const chats = app.slice(app.indexOf('function viewChats('), app.indexOf('function syncChatListRows('));

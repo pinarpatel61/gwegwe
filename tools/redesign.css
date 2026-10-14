@@ -1267,3 +1267,6 @@ html[data-theme="dark"] #app.v4 .pp-actions #pp-gift{color:#fff!important}
 .vc-topup-sheet,.vc-sticker-layer .vc-sticker-sheet,.vc-gift-sheet{background:var(--surface)!important;border-radius:var(--r-lg) var(--r-lg) 0 0!important;border:0!important}
 #vc-toast,.vc-toast,.toast{background:var(--navy)!important;color:#fff!important;border-radius:16px!important;font-weight:600;box-shadow:0 16px 30px -12px rgba(15,20,51,.6)!important;border:0!important}
 #install-btn,#pwa-update-btn{border-radius:999px!important;background:var(--navy)!important;color:#fff!important;font-weight:700;border:0!important;box-shadow:0 16px 30px -12px rgba(15,20,51,.6)!important}
+#app.v4 .v4 .chat-match-scroller{position:relative}
+#app.v4 .v4 .chat-match-next{position:absolute;right:-4px;top:12px;width:34px;height:34px;box-shadow:0 0 0 1px var(--line),0 8px 20px -8px rgba(0,0,0,.3)}
+#app.v4 .v4 .chat-match-next[hidden]{display:none}
