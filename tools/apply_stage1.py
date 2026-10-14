@@ -269,13 +269,12 @@ def patch_sw():
         print('sw.js: already patched')
         return
     src = re.sub(r"const VERSION = '[^']+';", "const VERSION = 'v1.10.0-redesign-v4';", src, count=1)
-    src = must_replace(src, "  '/app/app.css',\n", "  '/app/app.css',\n  '/app/redesign.css',\n", 'sw app.css')
-    src = must_replace(src, "  '/app/assets/fonts/manrope-bold.woff2'\n",
-                       "  '/app/assets/fonts/manrope-bold.woff2',\n"
+    src = must_replace(src, "  '/app/app.css',\n",
+                       "  '/app/app.css',\n  '/app/redesign.css',\n"
                        "  '/app/assets/fonts/onest-cyrillic.woff2',\n"
                        "  '/app/assets/fonts/onest-cyrillic-ext.woff2',\n"
                        "  '/app/assets/fonts/onest-latin.woff2',\n"
-                       "  '/app/assets/fonts/onest-latin-ext.woff2'\n", 'sw fonts')
+                       "  '/app/assets/fonts/onest-latin-ext.woff2',\n", 'sw app.css')
     save('sw.js', src, crlf)
     print('sw.js: patched')
 
