@@ -13,13 +13,15 @@ APP = Path(sys.argv[1])
 
 
 def load(name):
-    raw = APP.joinpath(name).read_text(encoding='utf-8', newline='')
+    with open(APP.joinpath(name), encoding='utf-8', newline='') as fh:
+        raw = fh.read()
     crlf = '\r\n' in raw
     return raw.replace('\r\n', '\n'), crlf
 
 
 def save(name, text, crlf):
-    APP.joinpath(name).write_text(text.replace('\n', '\r\n') if crlf else text, encoding='utf-8', newline='')
+    with open(APP.joinpath(name), 'w', encoding='utf-8', newline='') as fh:
+        fh.write(text.replace('\n', '\r\n') if crlf else text)
 
 
 def replace_fn(src, name, new_text):
