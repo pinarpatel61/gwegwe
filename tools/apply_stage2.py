@@ -50,7 +50,7 @@ DECK_CARD = r"""function vcDeckCardHtml(card){
     chips+='<span class="chip glass'+(isShared?' match':'')+'">'+h(localizedInterest(ints[i]))+'</span>';
   }
   var verified=card.verified?'<span class="verified" aria-label="'+h(t('verified_badge','анкета проверена'))+'">'+vcIcon('verified')+'</span>':'';
-  var segs=photos.length>1?'<div class="segs photo-segments" id="vc-photo-segments" aria-hidden="true">'+photos.map(function(u,pi){return '<i'+(pi===0?' class="on is-on"':'')+'></i>';}).join('')+'</div>':'';
+  var segs=photos.length>1?'<div class="photo-segments" id="vc-photo-segments" aria-hidden="true">'+photos.map(function(u,pi){return '<i'+(pi===0?' class="on is-on"':'')+'></i>';}).join('')+'</div>':'';
   var taps=photos.length>1?'<button type="button" class="photo-tap photo-tap-prev" data-photo-step="-1" aria-label="'+h(t('prev_photo','Предыдущее фото'))+'">'+glassIcon('back','vc-photo-nav-icon')+'</button><button type="button" class="photo-tap photo-tap-next" data-photo-step="1" aria-label="'+h(t('next_photo','Следующее фото'))+'">'+glassIcon('back','vc-photo-nav-icon vc-flip-horizontal')+'</button>':'';
   return '<article class="dcard profile-card" id="vc-glass-card" aria-label="'+h(name+(age?', '+age:''))+'">'+
     '<div class="profile-photo">'+

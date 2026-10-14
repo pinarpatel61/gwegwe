@@ -745,8 +745,6 @@ html[data-theme="dark"] #app.v4>.sidebar [aria-checked="true"] .vc-rail-theme-tr
 #app.v4 .v4 .dcard .photo-tap{position:absolute;top:0;bottom:0;width:50%;z-index:1;background:none;border:0;border-radius:0;opacity:1;padding:0}
 #app.v4 .v4 .dcard .photo-tap-prev{left:0}
 #app.v4 .v4 .dcard .photo-tap-next{right:0}
-#app.v4 .v4 .dcard .segs{z-index:2}
-#app.v4 .v4 .dcard .segs i.is-done{background:#fff;opacity:.85}
 #app.v4 .v4 .dcard .state,#app.v4 .v4 .dcard .info{z-index:2}
 #app.v4 .v4 .dcard .info{border:0;padding:0}
 #app.v4 .v4 .dcard .dinfo{z-index:1}
@@ -1270,9 +1268,10 @@ html[data-theme="dark"] #app.v4 .pp-actions #pp-gift{color:#fff!important}
 #app.v4 .v4 .chat-match-scroller{position:relative}
 #app.v4 .v4 .chat-match-next{position:absolute;right:-4px;top:12px;width:34px;height:34px;box-shadow:0 0 0 1px var(--line),0 8px 20px -8px rgba(0,0,0,.3)}
 #app.v4 .v4 .chat-match-next[hidden]{display:none}
-#app.v4 .v4 .dcard .segs{position:absolute;top:10px;left:12px;right:12px;bottom:auto;display:flex;gap:4px;height:auto;padding:0;margin:0;background:none}
-#app.v4 .v4 .dcard .segs i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.4);display:block;margin:0}
-#app.v4 .v4 .dcard .segs i.on,#app.v4 .v4 .dcard .segs i.is-on{background:#fff}
+#app.v4 .v4 .dcard .photo-segments{position:absolute;top:10px;left:12px;right:12px;bottom:auto;z-index:2;display:flex;gap:4px;height:auto;padding:0;margin:0;background:none;transform:none}
+#app.v4 .v4 .dcard .photo-segments i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.4);display:block;margin:0;opacity:1}
+#app.v4 .v4 .dcard .photo-segments i.on,#app.v4 .v4 .dcard .photo-segments i.is-on{background:#fff}
+#app.v4 .v4 .dcard .photo-segments i.is-done{background:#fff;opacity:.85}
 #app.v4 .v4 .dcard .photo-tap{display:flex;align-items:center;justify-content:flex-start;color:#fff}
 #app.v4 .v4 .dcard .photo-tap-next{justify-content:flex-end}
 #app.v4 .v4 .dcard .photo-tap .vc-photo-nav-icon{width:28px;height:28px;margin:0 10px;opacity:0;transition:opacity .15s;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
