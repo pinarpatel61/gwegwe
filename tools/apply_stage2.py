@@ -187,7 +187,7 @@ function v4ChatLayout(peerId){
   for(i=0;i<chats.length;i++){var pid=parseInt(chats[i].peer_id||chats[i].id,10)||0;if(pid===peerId)found=true;rows+=v4ChatRowHtml(chats[i],peerId);}
   var nameEl=document.getElementById('vc-chat-name'),avImg=document.querySelector('#vc-chat-avatar img'),presEl=document.getElementById('vc-chat-presence');
   var peerName=nameEl?nameEl.textContent.trim():'',peerPhoto=avImg?(avImg.getAttribute('data-full')||avImg.getAttribute('src')||''):'',peerPres=presEl?presEl.textContent.trim():'';
-  if(!found)rows='<div class="crow chat-row on" role="button" tabindex="0" data-pid="'+peerId+'"><div class="av"'+(peerPhoto?' style="background-image:url('+h(peerPhoto)+')"':'')+'></div><div class="cinfo"><div class="cnm"><b>'+h(peerName)+'</b></div><div class="cmsg">'+h(peerPres)+'</div></div></div>'+rows;
+  if(!found)rows='<div class="crow chat-row on" role="button" tabindex="0" data-pid="'+peerId+'"><div class="av">'+(peerPhoto?'<img src="'+h(peerPhoto)+'" alt="">':'')+'</div><div class="cinfo"><div class="cnm"><b>'+h(peerName)+'</b></div><div class="cmsg">'+h(peerPres)+'</div></div></div>'+rows;
   var wrap=document.createElement('div');wrap.className='v4 chats is-thread';wrap.id='vc-chats-layout';
   wrap.innerHTML='<div class="clist"><div class="hd"><div class="row-between"><h1 class="page-h">'+h(t('nav_chats','Чаты'))+'</h1>'+v4BalancePill()+'</div></div><div class="sc"><div class="list clist-rows">'+rows+'</div></div></div><div class="cthread"></div>'+
     '<aside class="cinfo">'+(peerPhoto?'<img class="big" src="'+h(peerPhoto)+'" alt="">':'<div class="big">'+h(initials(peerName||'?'))+'</div>')+'<h2 class="sec">'+h(peerName)+'</h2><p class="muted small">'+h(peerPres)+'</p>'+
@@ -204,7 +204,7 @@ function v4ChatSyncPeer(peerId){
   var peerName=nameEl?nameEl.textContent.trim():'',peerPhoto=avImg?(avImg.getAttribute('data-full')||avImg.getAttribute('src')||''):'',peerPres=presEl?presEl.textContent.trim():'';
   if(!peerName)return;
   var row=wrap.querySelector('.crow[data-pid="'+peerId+'"]');
-  if(row){var b=row.querySelector('.cnm b');if(b&&b.textContent!==peerName)b.textContent=peerName;var av=row.querySelector('.av');if(av&&peerPhoto&&!av.querySelector('img')&&!av.style.backgroundImage)av.style.backgroundImage='url('+peerPhoto+')';}
+  if(row){var b=row.querySelector('.cnm b');if(b&&b.textContent!==peerName)b.textContent=peerName;var av=row.querySelector('.av');if(av&&peerPhoto&&!av.querySelector('img')){var im=document.createElement('img');im.alt='';im.src=peerPhoto;av.appendChild(im);}}
   var aside=wrap.querySelector('aside.cinfo');if(!aside)return;
   var title=aside.querySelector('.sec');if(title&&title.textContent!==peerName)title.textContent=peerName;
   var pres=aside.querySelector('p.muted');if(pres&&peerPres)pres.textContent=peerPres;

@@ -915,7 +915,7 @@ html[data-theme="dark"] #app.v4 .v4 .panel .vc-icebreaker{background:var(--navy-
 #app.v4 .chat-compact-view .chat-compact-access>span{width:36px;height:36px;border-radius:12px;background:rgba(255,176,32,.25);display:grid;place-items:center;flex:none}
 #app.v4 .chat-compact-view .chat-quick-action{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:var(--coral-soft)!important;color:var(--coral)!important;font-weight:700;font-size:13px;border:0!important;box-shadow:none!important}
 #app.v4 .chat-compact-view .chat-thread{flex:1;min-height:0;overflow-y:auto;padding:16px 12px 8px!important;background:var(--bg)!important;display:flex;flex-direction:column}
-#app.v4 .chat-compact-view .chat-thread .chat-empty{margin:auto;max-width:360px}
+#app.v4 .chat-compact-view .chat-thread .chat-empty{margin:auto;max-width:360px;flex:none!important;min-height:0!important;height:auto!important;align-self:center;width:100%}
 #app.v4 .chat-compact-view .msg-wrap{display:flex;flex-direction:column;align-items:flex-start;max-width:78%;margin:0 0 10px}
 #app.v4 .chat-compact-view .msg-wrap.me{align-self:flex-end;align-items:flex-end}
 #app.v4 .chat-compact-view .msg-wrap.is-grouped{margin-bottom:3px}
