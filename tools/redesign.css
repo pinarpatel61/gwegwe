@@ -956,7 +956,7 @@ html[data-theme="dark"] #app.v4 .chat-compact-view .bub.me{background:var(--cora
 #app.v4 .pp-grid{display:block;padding:0 16px}
 #app.v4 .pp-media{margin:0}
 #app.v4 .pp-hero-wrap{position:relative}
-#app.v4 .pp-hero{display:block;width:100%;height:66vh;min-height:420px;max-height:620px;border-radius:var(--r-lg)!important;overflow:hidden;background:#d9dae2 center/cover no-repeat;position:relative;border:0!important;box-shadow:var(--card-shadow)!important;padding:0}
+#app.v4 .pp-hero{display:block;width:100%;height:66vh;min-height:420px;max-height:620px;border-radius:var(--r-lg)!important;overflow:hidden;background-color:#d9dae2;background-size:cover;background-position:center;background-repeat:no-repeat;position:relative;border:0!important;box-shadow:var(--card-shadow)!important;padding:0}
 #app.v4 .pp-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 #app.v4 .pp-hero-shade{position:absolute;inset:auto 0 0;height:60%;background:linear-gradient(transparent,rgba(10,10,20,.8))}
 #app.v4 .pp-hero-info{position:absolute;left:18px;right:18px;bottom:22px;color:#fff;text-align:left}
@@ -968,7 +968,7 @@ html[data-theme="dark"] #app.v4 .chat-compact-view .bub.me{background:var(--cora
 #app.v4 .pp-thumbs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 0 4px}
 #app.v4 .pp-thumbs::-webkit-scrollbar{display:none}
 #app.v4 .pp-thumb-wrap{position:relative;flex:none}
-#app.v4 .pp-thumb{width:72px;height:92px;border-radius:14px!important;overflow:hidden;background:var(--chip) center/cover no-repeat;box-shadow:0 0 0 1px var(--line)!important;border:0!important;display:block;padding:0}
+#app.v4 .pp-thumb{width:72px;height:92px;border-radius:14px!important;overflow:hidden;background-color:var(--chip);background-size:cover;background-position:center;background-repeat:no-repeat;box-shadow:0 0 0 1px var(--line)!important;border:0!important;display:block;padding:0}
 #app.v4 .pp-thumb.active{box-shadow:0 0 0 2.5px var(--coral)!important}
 #app.v4 .pp-thumb-wrap .pp-photo-like-btn{position:absolute;left:5px;bottom:5px;height:20px;padding:0 6px;border-radius:10px;background:rgba(0,0,0,.5)!important;color:#fff!important;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:3px;border:0!important;box-shadow:none!important}
 #app.v4 .pp-thumb-wrap .pp-photo-like-btn svg{width:11px;height:11px}
@@ -1108,7 +1108,9 @@ html[data-theme="dark"] #app.v4 .pp-actions #pp-gift{color:#fff!important}
 #app.v4 .own-profile-preview,#app.v4 .own-profile-account,#app.v4 .own-profile-gallery{background:var(--surface)!important;border-radius:var(--r)!important;box-shadow:0 0 0 1px var(--line)!important;border:0!important;padding:16px!important;backdrop-filter:none!important;margin:0!important}
 #app.v4 .own-profile-cover{display:none!important}
 #app.v4 .vc-pf-who{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-#app.v4 .own-profile-avatar{position:relative!important;width:84px!important;height:84px!important;border-radius:50%!important;background:var(--navy) center/cover no-repeat!important;display:grid;place-items:center;color:#fff;font-size:30px;font-weight:800;flex:none;border:0!important;box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--coral)!important;margin:0!important;overflow:visible;left:auto!important;top:auto!important;bottom:auto!important}
+#app.v4 .own-profile-avatar{position:relative!important;width:84px!important;height:84px!important;border-radius:50%!important;background-color:var(--navy)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;display:grid;place-items:center;color:#fff;font-size:30px;font-weight:800;flex:none;border:0!important;box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--coral)!important;margin:0!important;overflow:visible;left:auto!important;top:auto!important;bottom:auto!important;transform:none!important}
+#app.v4 .vc-pf-who{margin:0 0 12px!important;padding:0!important;transform:none!important;position:static!important}
+#app.v4 .own-profile-preview{overflow:visible!important}
 #app.v4 .own-profile-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 #app.v4 .vc-pf-avatar-btn{position:absolute;right:-4px;bottom:-4px;width:30px;height:30px;border-radius:50%!important;background:var(--coral)!important;color:#fff!important;display:grid;place-items:center;border:2px solid var(--surface)!important;box-shadow:none!important}
 #app.v4 .vc-pf-avatar-btn svg{width:14px;height:14px}
@@ -1140,7 +1142,8 @@ html[data-theme="dark"] #app.v4 .pp-actions #pp-gift{color:#fff!important}
 #app.v4 .vc-profile-add-photo{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px!important;background:var(--coral-soft)!important;color:var(--coral)!important;font-weight:700;font-size:13px;border:0!important;box-shadow:none!important}
 #app.v4 .vc-profile-add-photo svg{width:16px;height:16px}
 #app.v4 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-#app.v4 .pgrid .pcell,#app.v4 .pgrid .own-profile-photo-empty{aspect-ratio:3/4;border-radius:14px!important;overflow:hidden;background:var(--chip) center/cover no-repeat!important;position:relative;border:0!important;box-shadow:0 0 0 1px var(--line)!important}
+#app.v4 .pgrid .pcell,#app.v4 .pgrid .own-profile-photo-empty{aspect-ratio:3/4;border-radius:14px!important;overflow:hidden;background-color:var(--chip)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;position:relative;border:0!important;box-shadow:0 0 0 1px var(--line)!important}
+#app.v4 .pgrid .pcell img{width:100%;height:100%;object-fit:cover;display:block}
 #app.v4 .pgrid .own-profile-photo-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:12px;font-weight:600}
 #app.v4 .pgrid .own-profile-photo-empty svg{width:24px;height:24px}
 #app.v4 .pgrid .vc-pf-main-badge{position:absolute;left:8px;top:8px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--coral);color:#fff}
@@ -1286,3 +1289,12 @@ html[data-theme="dark"] #app.v4 .pp-actions #pp-gift{color:#fff!important}
 #app.v4 .v4 .dcard .photo-tap .vc-photo-nav-icon{width:28px;height:28px;margin:0 10px;opacity:0;transition:opacity .15s;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
 @media (hover:hover){#app.v4 .v4 .dcard:hover .photo-tap .vc-photo-nav-icon{opacity:.85}}
 #app.v4 .v4 .chat-match-next .vc-chat-next-icon{width:18px;height:18px}
+/* mobile header: compact tools so the deck header never overflows 390px */
+#app.v4 .v4 .dhead .dtitle{min-width:0;flex:1}
+#app.v4 .v4 .dhead .logo{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+#app.v4 .v4 .dtools{flex:none}
+@media (max-width:979px){
+  #app.v4 .v4 .dtools .online-filter{font-size:0;gap:0;padding:0 8px;width:50px;justify-content:center}
+  #app.v4 .v4 .dtools .vibes{height:36px;padding:0 10px}
+  #app.v4 .v4 .dtools .vibes b{font-size:14px}
+}

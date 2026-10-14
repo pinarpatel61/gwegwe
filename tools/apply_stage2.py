@@ -195,6 +195,20 @@ function v4ChatLayout(peerId){
   body.insertBefore(wrap,view);wrap.querySelector('.cthread').appendChild(view);
   $$('.chat-row',wrap).forEach(function(r){bindActivation(r,function(){var pid=parseInt(r.dataset.pid,10);if(pid&&pid!==peerId)navigate('/chat/'+pid);},'link');});
   $$('[data-cinfo]',wrap).forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.cinfo;if(k==='profile'){openProfile(peerId);}else if(k==='gift'){var g=document.getElementById('vc-chat-floating-gift');if(g)g.click();}else{var m=document.getElementById('vc-chat-block');if(m)m.click();}});});
+  [700,1800,4000].forEach(function(ms){setTimeout(function(){v4ChatSyncPeer(peerId);},ms);});
+}
+/* The thread header fills in asynchronously; copy name, photo and presence into the list row and the partner card. */
+function v4ChatSyncPeer(peerId){
+  var wrap=document.getElementById('vc-chats-layout');if(!wrap||String(state.route||'').indexOf('/chat/')!==0)return;
+  var nameEl=document.getElementById('vc-chat-name'),avImg=document.querySelector('#vc-chat-avatar img'),presEl=document.getElementById('vc-chat-presence');
+  var peerName=nameEl?nameEl.textContent.trim():'',peerPhoto=avImg?(avImg.getAttribute('data-full')||avImg.getAttribute('src')||''):'',peerPres=presEl?presEl.textContent.trim():'';
+  if(!peerName)return;
+  var row=wrap.querySelector('.crow[data-pid="'+peerId+'"]');
+  if(row){var b=row.querySelector('.cnm b');if(b&&b.textContent!==peerName)b.textContent=peerName;var av=row.querySelector('.av');if(av&&peerPhoto&&!av.querySelector('img')&&!av.style.backgroundImage)av.style.backgroundImage='url('+peerPhoto+')';}
+  var aside=wrap.querySelector('aside.cinfo');if(!aside)return;
+  var title=aside.querySelector('.sec');if(title&&title.textContent!==peerName)title.textContent=peerName;
+  var pres=aside.querySelector('p.muted');if(pres&&peerPres)pres.textContent=peerPres;
+  var big=aside.querySelector('.big');if(big&&peerPhoto&&big.tagName!=='IMG'){var img=document.createElement('img');img.className='big';img.alt='';img.src=peerPhoto;big.parentNode.replaceChild(img,big);}
 }
 function v4ObserveChat(peerId){
   var body=document.getElementById('vc-main-body');if(!body)return;
