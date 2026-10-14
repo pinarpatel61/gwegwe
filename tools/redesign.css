@@ -21,7 +21,7 @@
   --solid:#0F1433;--solid-ink:#fff;--card-shadow:0 24px 44px -20px rgba(18,20,42,.5);
   --safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px);
   --nav-h:64px;--r:20px;--r-lg:28px;
-  --font:Onest,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font:Onest,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-display:var(--font);
   /* legacy aliases (app.css, design-prototype-20261002) */
   --text:#12142A;--text2:rgba(18,20,42,.84);--text3:#6C7084;
   --soft:#F1F2F6;--hint:#F1F2F6;--border2:#D9DBE5;--border:#E6E7EE;--div:#E6E7EE;
@@ -103,7 +103,6 @@ html[data-theme="dark"] #app.v4>.sidebar [aria-checked="true"] .vc-rail-theme-tr
   #app.v4{grid-template-columns:minmax(0,1fr)}
   #app.v4>.sidebar{display:none}
   #app.v4>.center{grid-column:1}
-  #app.v4>.center>.main-body{padding:var(--safe-t) 0 0!important}
   #app.v4>.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;height:calc(var(--nav-h) + var(--safe-b));padding:6px 4px var(--safe-b);background:var(--surface)!important;border-top:1px solid var(--line)!important;box-shadow:none!important;transform:none}
   #app.v4>.bottomnav .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--muted);font-size:11px;font-weight:600;position:relative;border-radius:14px;background:none;border:0;padding:0;margin:0;cursor:pointer;user-select:none;min-width:0}
   #app.v4>.bottomnav .bn-item.active,#app.v4>.bottomnav .bn-item.on{color:var(--coral)}
