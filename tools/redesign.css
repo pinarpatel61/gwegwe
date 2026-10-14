@@ -1270,3 +1270,11 @@ html[data-theme="dark"] #app.v4 .pp-actions #pp-gift{color:#fff!important}
 #app.v4 .v4 .chat-match-scroller{position:relative}
 #app.v4 .v4 .chat-match-next{position:absolute;right:-4px;top:12px;width:34px;height:34px;box-shadow:0 0 0 1px var(--line),0 8px 20px -8px rgba(0,0,0,.3)}
 #app.v4 .v4 .chat-match-next[hidden]{display:none}
+#app.v4 .v4 .dcard .segs{position:absolute;top:10px;left:12px;right:12px;bottom:auto;display:flex;gap:4px;height:auto;padding:0;margin:0;background:none}
+#app.v4 .v4 .dcard .segs i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.4);display:block;margin:0}
+#app.v4 .v4 .dcard .segs i.on,#app.v4 .v4 .dcard .segs i.is-on{background:#fff}
+#app.v4 .v4 .dcard .photo-tap{display:flex;align-items:center;justify-content:flex-start;color:#fff}
+#app.v4 .v4 .dcard .photo-tap-next{justify-content:flex-end}
+#app.v4 .v4 .dcard .photo-tap .vc-photo-nav-icon{width:28px;height:28px;margin:0 10px;opacity:0;transition:opacity .15s;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+@media (hover:hover){#app.v4 .v4 .dcard:hover .photo-tap .vc-photo-nav-icon{opacity:.85}}
+#app.v4 .v4 .chat-match-next .vc-chat-next-icon{width:18px;height:18px}

@@ -50,8 +50,8 @@ DECK_CARD = r"""function vcDeckCardHtml(card){
     chips+='<span class="chip glass'+(isShared?' match':'')+'">'+h(localizedInterest(ints[i]))+'</span>';
   }
   var verified=card.verified?'<span class="verified" aria-label="'+h(t('verified_badge','анкета проверена'))+'">'+vcIcon('verified')+'</span>':'';
-  var segs=photos.length>1?'<div class="segs" id="vc-photo-segments" aria-hidden="true">'+photos.map(function(u,pi){return '<i'+(pi===0?' class="on is-on"':'')+'></i>';}).join('')+'</div>':'';
-  var taps=photos.length>1?'<button type="button" class="photo-tap photo-tap-prev" data-photo-step="-1" aria-label="'+h(t('prev_photo','Предыдущее фото'))+'"></button><button type="button" class="photo-tap photo-tap-next" data-photo-step="1" aria-label="'+h(t('next_photo','Следующее фото'))+'"></button>':'';
+  var segs=photos.length>1?'<div class="segs photo-segments" id="vc-photo-segments" aria-hidden="true">'+photos.map(function(u,pi){return '<i'+(pi===0?' class="on is-on"':'')+'></i>';}).join('')+'</div>':'';
+  var taps=photos.length>1?'<button type="button" class="photo-tap photo-tap-prev" data-photo-step="-1" aria-label="'+h(t('prev_photo','Предыдущее фото'))+'">'+glassIcon('back','vc-photo-nav-icon')+'</button><button type="button" class="photo-tap photo-tap-next" data-photo-step="1" aria-label="'+h(t('next_photo','Следующее фото'))+'">'+glassIcon('back','vc-photo-nav-icon vc-flip-horizontal')+'</button>':'';
   return '<article class="dcard profile-card" id="vc-glass-card" aria-label="'+h(name+(age?', '+age:''))+'">'+
     '<div class="profile-photo">'+
       (photo?'<img class="ph"'+vcCardSrc(photo)+' alt="" fetchpriority="high" id="vc-card-photo">':'<div class="ph" id="vc-card-photo" style="background:'+avatarBg(name||'?')+'"></div>')+
@@ -59,7 +59,7 @@ DECK_CARD = r"""function vcDeckCardHtml(card){
       '<span class="state'+(online?'':' off')+'"><i></i>'+h(online?t('online_now','Сейчас онлайн'):t('offline_short','не в сети'))+'</span>'+
       '<button type="button" class="info" id="vc-full-profile" data-act="profile" aria-label="'+h(t('all_profile','Вся анкета'))+'" title="'+h(t('all_profile','Вся анкета'))+'">'+v4Icon('info')+'</button>'+
       '<div class="dinfo"><div class="nm">'+h(name)+(age?', '+age:'')+verified+'</div>'+(city?'<div class="loc">'+v4Icon('pin')+h(city)+'</div>':'')+(chips?'<div class="chips">'+chips+'</div>':'')+'<p class="bio" id="vc-card-bio"'+(bio?'':' data-pending="1"')+'>'+h(bio)+'</p></div>'+
-      '<div class="stamp like" aria-hidden="true">'+h(t('like','Нравится'))+'</div><div class="stamp nope" aria-hidden="true">'+h(t('disc_nope','Пропустить'))+'</div>'+
+      '<div class="stamp like" aria-hidden="true">'+h(t('disc_like','Нравится'))+'</div><div class="stamp nope" aria-hidden="true">'+h(t('disc_nope','Пропустить'))+'</div>'+
     '</div></article>';
 }
 """
@@ -269,7 +269,7 @@ VIEW_CHATS = r"""function viewChats(){
       var sm=chats[si],sav=sm.photo||sm.avatar||'',sn=localizedPersonName(sm.name||sm.fullname||''),stripUnread=parseInt(sm.unread,10)||0;
       strip+='<button type="button" class="face'+(stripUnread?' has-unread':'')+'" data-match-chat="'+(sm.peer_id||sm.id||0)+'" aria-label="'+h(sn)+'"><span class="chat-match-avatar avatar'+(sm.online?' ring':'')+'" style="background:'+(sav?'url('+h(sav)+') center/cover,':'')+avatarBg(sn)+'">'+(sav?'':h(initials(sn)))+(stripUnread?'<b class="chat-match-unread">'+(stripUnread>99?'99+':stripUnread)+'</b>':'')+'</span><small>'+h(sn)+'</small></button>';
     }
-    strip+='</div><button type="button" class="chat-match-next ibtn" id="vc-chat-match-next" aria-label="'+h(t('next','Дальше'))+'">'+v4Icon('chev')+'</button></div>';
+    strip+='</div><button type="button" class="chat-match-next ibtn" id="vc-chat-match-next" aria-label="'+h(t('next','Дальше'))+'">'+glassIcon('back','vc-chat-next-icon vc-flip-horizontal')+'</button></div>';
   }
   var rows='';for(i=0;i<chats.length;i++)rows+=v4ChatRowHtml(chats[i],0);
   var listHtml=chats.length?'<div class="list chat-list" id="vc-chat-list">'+rows+'</div><div class="empty" id="vc-chat-search-empty" hidden><b>'+h(t('no_search_results','Ничего не найдено'))+'</b></div>':contextCtaHtml({tone:'purple',centered:true,icon:'chats',title:t('chats_context_title','Здесь появятся ваши переписки'),copy:t('chats_context_copy','Выберите анкету и напишите сообщение — диалог начнётся сразу.'),primary:{label:t('go_discover','К поиску'),route:'/'}});
